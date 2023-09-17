@@ -6,14 +6,6 @@ import { join } from 'path';
 
 @Injectable()
 export class RestaurantService {
-  // @Client({
-  //   transport: Transport.GRPC,
-  //   options: {
-  //     package: 'restaurant',
-  //     protoPath: join(__dirname, '../../HUMF_Proto/proto/restaurant.proto'),
-  //   },
-  // })
-  // client: ClientGrpc;
 
   private restaurantService: RestaurantService;
 
