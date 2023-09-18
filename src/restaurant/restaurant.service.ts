@@ -1,37 +1,44 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
-import { Client, ClientGrpc, Transport} from '@nestjs/microservices';
-import { join } from 'path';
+import { Injectable, Inject, OnModuleInit } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
+import {
+  Empty,
+  CreateRestaurantDto, 
+  Restaurant, 
+  RestaurantId, 
+  RestaurantList, 
+  RestaurantServiceClient, 
+  UpdateRestaurantDto 
+} from '../../humf-proto/build/proto/restaurant';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class RestaurantService {
+export class RestaurantService implements OnModuleInit {
 
-  private restaurantService: RestaurantService;
+  private restaurantService: RestaurantServiceClient;
 
   constructor(@Inject('RESTAURANT_PACKAGE') private client: ClientGrpc) {}
 
   onModuleInit() {
-    this.restaurantService = this.client.getService<RestaurantService>('RestaurantService');
+    this.restaurantService = this.client.getService<RestaurantServiceClient>("RestaurantService")
   }
 
-  create(createRestaurantDto: CreateRestaurantDto) {
-    return this.restaurantService.create(createRestaurantDto);
+  findAll(): Observable<RestaurantList>{
+    return this.restaurantService.getAllRestaurant({})
   }
 
-  findAll() {
-    return this.restaurantService.findAll();
+  findOne(restaurantId: RestaurantId): Observable<Restaurant>{
+    return this.restaurantService.getRestaurant(restaurantId)
   }
 
-  findOne(id: number) {
-    return this.restaurantService.findOne(id);
+  create(createRestaurantDto: CreateRestaurantDto): Observable<Restaurant>{
+    return this.restaurantService.addRestaurant(createRestaurantDto)
   }
 
-  update(id: number, updateRestaurantDto: UpdateRestaurantDto) {
-    return this.restaurantService.update(id,updateRestaurantDto);
+  update(updateRestaurantDto: UpdateRestaurantDto): Observable<Restaurant>{
+    return this.restaurantService.updateRestaurant(updateRestaurantDto)
   }
 
-  remove(id: number) {
-    return this.restaurantService.remove(id);
+  remove(restaurantId: RestaurantId): Observable<Empty>{
+    return this.restaurantService.deleteRestaurant(restaurantId)
   }
 }
