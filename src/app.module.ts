@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+// import { AppController } from './app.controller';
+// import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
@@ -19,7 +19,7 @@ import { join } from 'path';
         transport: Transport.GRPC,
         options: {
           package: 'restaurant',
-          protoPath: join(__dirname, '..\humf-proto\proto\restaurant.proto'),
+          protoPath: join(__dirname, "../humf-proto/proto/restaurant.proto"),
         },
       },
     ]),
@@ -27,7 +27,7 @@ import { join } from 'path';
     AuthModule,
     RestaurantModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  // controllers: [AppController],
+  // providers: [AppService],
 })
 export class AppModule {}
