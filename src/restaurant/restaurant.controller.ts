@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
-import { CreateRestaurantDto } from '../../humf-proto/build/proto/restaurant';
+import { CreateRestaurantDto, FilterDto } from '../../humf-proto/build/proto/restaurant';
 import { RestaurantUpdateField } from './entities/restaurant.entity';
 
 @Controller('restaurant')
@@ -20,6 +20,11 @@ export class RestaurantController {
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.restaurantService.findOne({id : +id});
+  }
+
+  @Get()
+  filter(@Body() filterDto: FilterDto){
+    return this.restaurantService.filter(filterDto);
   }
 
   @Patch(':id')
