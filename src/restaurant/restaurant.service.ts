@@ -5,7 +5,8 @@ import {
   CreateRestaurantDto, 
   Restaurant, 
   RestaurantId, 
-  RestaurantList, 
+  RestaurantList,
+  MenuList, 
   RestaurantServiceClient, 
   UpdateRestaurantDto, 
   FilterRestaurantDto
@@ -33,6 +34,10 @@ export class RestaurantService implements OnModuleInit {
 
   filter(filterRestaurantDto: FilterRestaurantDto){
     return this.restaurantService.filterRestaurant(filterRestaurantDto)
+  }
+
+  getAllMenus(restaurantId: RestaurantId): Observable<MenuList>{
+    return this.restaurantService.getAllMenus(restaurantId)
   }
 
   create(createRestaurantDto: CreateRestaurantDto): Observable<Restaurant>{
