@@ -22,6 +22,11 @@ export class RestaurantController {
     return this.restaurantService.findOne({id : +id});
   }
 
+  @Get(':id')
+  getAllMenus(){
+    return 
+  }
+
   @Get()
   filter(@Body() filterRestaurantDto: FilterRestaurantDto){
     return this.restaurantService.filter(filterRestaurantDto);
