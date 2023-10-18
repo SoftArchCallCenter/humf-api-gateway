@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./
+    container_name: api-gateway
+    env_file:
+      - .env
+    ports:
+      - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
+    volumes:
+      - ./src:/app/src
