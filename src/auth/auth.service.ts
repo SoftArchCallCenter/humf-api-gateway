@@ -16,24 +16,23 @@ export class AuthService {
 
     async signup(userData: SignupUserDto): Promise<any> {
         try {
-            const authServiceUrl = this.configService.get<string>('USER_SERVICE_URL');
+            const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
             const signupUrl = `${authServiceUrl}/auth/signup`;
-            const response = await firstValueFrom(this.httpService.post(signupUrl, userData));
-            
+            const response = await firstValueFrom(this.httpService.post(signupUrl, userData));            
+
             if (response.status === HttpStatus.CREATED) {
                 return response.data;
             } else {
-                throw new HttpException('User signup failed', HttpStatus.BAD_REQUEST);
+                throw new HttpException('User signup failed 1', response.status);
             }
         } catch (error) {
-            // Handle other errors such as network issues or timeouts
             throw new HttpException('User signup failed', HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     async login(credentials: LoginUserDto): Promise<any> {
         try {
-            const authServiceUrl = this.configService.get<string>('USER_SERVICE_URL');
+            const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
             const loginUrl = `${authServiceUrl}/auth/login`;
             const response = await firstValueFrom(this.httpService.post(loginUrl, credentials));
             
