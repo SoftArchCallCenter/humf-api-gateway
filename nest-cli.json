@@ -3,12 +3,7 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "assets": [
-      {
-        "include": "../**/*.proto",
-        "outDir": "dist"
-      }
-  ],
+    "assets": ["../**/*.proto"],
     "watchAssets": true,
     "deleteOutDir": true
   }
