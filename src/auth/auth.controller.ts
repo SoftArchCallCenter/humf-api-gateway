@@ -1,13 +1,10 @@
 import {
   Body,
   Controller,
-  Get,
   HttpCode,
   HttpStatus,
   Post,
-  Redirect,
   Req,
-  Res,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as express from 'express';
@@ -37,58 +34,16 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
-  // @Post('logout')
-  // logout(@Res() res: express.Response) {
-  //   // console.log(res);
-  // }
-  // @Public()
-  // @Redirect(logoutUrl, 307)
-  // @Post('logout')
-  // async logout(@Res() response: express.Response) {
-  //   // const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
-  //   // const logoutUrl = `${authServiceUrl}/auth/logout`;
-  //   console.log("send logout");
-  //   const logoutUrl = `http://127.0.0.1:5001/auth/logout`;
-  //   return response.redirect(307, logoutUrl);
-  // }
-
   @Post('logout')
+  @HttpCode(HttpStatus.OK)
   logout(@Req() request: express.Request) {
-    return this.authService.logout(request)
+    return this.authService.logout(request);
   }
-  // @Post('logout')
-  // async logout(
-  //   @Req() request: express.Request,
-  //   @Res() response: express.Response,
-  // ) {
-  //   const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
-  //   const logoutUrl = `${authServiceUrl}/auth/logout`;
 
-  //   console.log(logoutUrl);
-    
-
-  //   // Extract the Authorization header from the current request
-  //   const authorizationHeader = request.headers['authorization'];
-
-  //   // Set the Authorization header for the redirect
-  //   if (authorizationHeader) {
-  //     response.setHeader('Authorization', authorizationHeader);
-  //   }
-  //   console.log("send", authorizationHeader);
-  //   // console.log(response)
-        
-  //   // Perform the redirect with the header included
-  //   // return response.status(200);
-  //   return response.redirect(308, logoutUrl);
-  // }
-  
-  // @Public()
-  // @Post('refresh')
-  // @HttpCode(HttpStatus.OK)
-  // refreshTokens(
-  //   @GetCurrentUserId() userId: number,
-  //   @GetCurrentUser('refreshToken') refreshToken: string,
-  // ): Promise<Tokens> {
-  //   return this.authService.refreshTokens(userId, refreshToken);
-  // }
+  @Public()
+  @Post('refresh')
+  @HttpCode(HttpStatus.OK)
+  refreshTokens(@Req() request: express.Request) {
+    return this.authService.refreshTokens(request);
+  }
 }

@@ -66,20 +66,24 @@ export class AuthService {
       );
   }
 
-  // async refreshTokens(userId: number, rt: string): Promise<any> {
-  //   const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
-  //   const refreshTokensUrl = `${authServiceUrl}/auth/refresh`;
+  async refreshTokens(request: express.Request): Promise<any> {
+    const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
+    const refreshTokensUrl = `${authServiceUrl}/auth/refresh`;
 
-  //   return this.httpService
-  //     .post(refreshTokensUrl, userId)
-  //     .pipe(map((resp) => resp.data))
-  //     .pipe(
-  //       catchError((error: AxiosError) => {
-  //         const errorMessage =
-  //           error.response?.data || 'An internal error occurred.';
-  //         throw new InternalServerErrorException(errorMessage);
-  //       }),
-  //     );
-  //   return null;
-  // }
+    const jwtToken = request.headers.authorization;
+    const headers = {
+      Authorization: jwtToken,
+    };
+
+    return this.httpService
+      .post(refreshTokensUrl, {}, { headers })
+      .pipe(map((resp) => resp.data))
+      .pipe(
+        catchError((error: AxiosError) => {
+          const errorMessage =
+            error.response?.data || 'An internal error occurred.';
+          throw new InternalServerErrorException(errorMessage);
+        }),
+      );
+  }
 }
