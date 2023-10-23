@@ -51,31 +51,36 @@ export class AuthController {
   //   const logoutUrl = `http://127.0.0.1:5001/auth/logout`;
   //   return response.redirect(307, logoutUrl);
   // }
-  @Post('logout')
-  async logout(
-    @Req() request: express.Request,
-    @Res() response: express.Response,
-  ) {
-    const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
-    const logoutUrl = `${authServiceUrl}/auth/logout`;
 
-    console.log(logoutUrl);
+  @Post('logout')
+  logout(@Req() request: express.Request) {
+    return this.authService.logout(request)
+  }
+  // @Post('logout')
+  // async logout(
+  //   @Req() request: express.Request,
+  //   @Res() response: express.Response,
+  // ) {
+  //   const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
+  //   const logoutUrl = `${authServiceUrl}/auth/logout`;
+
+  //   console.log(logoutUrl);
     
 
-    // Extract the Authorization header from the current request
-    const authorizationHeader = request.headers['authorization'];
+  //   // Extract the Authorization header from the current request
+  //   const authorizationHeader = request.headers['authorization'];
 
-    // Set the Authorization header for the redirect
-    if (authorizationHeader) {
-      response.setHeader('Authorization', authorizationHeader);
-    }
-    console.log("send", authorizationHeader);
-    console.log(response)
+  //   // Set the Authorization header for the redirect
+  //   if (authorizationHeader) {
+  //     response.setHeader('Authorization', authorizationHeader);
+  //   }
+  //   console.log("send", authorizationHeader);
+  //   // console.log(response)
         
-    // Perform the redirect with the header included
-    // return response.status(200);
-    return response.redirect(308, logoutUrl);
-  }
+  //   // Perform the redirect with the header included
+  //   // return response.status(200);
+  //   return response.redirect(308, logoutUrl);
+  // }
   
   // @Public()
   // @Post('refresh')

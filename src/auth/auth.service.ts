@@ -1,11 +1,8 @@
 import { HttpService } from '@nestjs/axios';
-import {
-  Injectable,
-  InternalServerErrorException
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AxiosError } from 'axios';
-import { Request } from 'express';
+import * as express from 'express';
 import { catchError, map } from 'rxjs';
 import { LoginUserDto } from 'src/auth/dto/login-user.dto';
 import { SignupUserDto } from 'src/auth/dto/signup-user.dto';
@@ -36,9 +33,6 @@ export class AuthService {
     const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
     const loginUrl = `${authServiceUrl}/auth/login`;
 
-    console.log(loginUrl);
-    
-
     return this.httpService
       .post(loginUrl, credentials)
       .pipe(map((resp) => resp.data))
@@ -51,21 +45,26 @@ export class AuthService {
       );
   }
 
-  // async logout(userId: Request): Promise<any> {
-  //   const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
-  //   const logoutUrl = `${authServiceUrl}/auth/logout`;
+  async logout(request: express.Request): Promise<any> {
+    const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
+    const logoutUrl = `${authServiceUrl}/auth/logout`;
 
-  //   return this.httpService
-  //     .post(logoutUrl, userId)
-  //     .pipe(map((resp) => resp.data))
-  //     .pipe(
-  //       catchError((error: AxiosError) => {
-  //         const errorMessage =
-  //           error.response?.data || 'An internal error occurred.';
-  //         throw new InternalServerErrorException(errorMessage);
-  //       }),
-  //     );
-  // }
+    const jwtToken = request.headers.authorization;
+    const headers = {
+      Authorization: jwtToken,
+    };
+
+    return this.httpService
+      .post(logoutUrl, {}, { headers })
+      .pipe(map((resp) => resp.data))
+      .pipe(
+        catchError((error: AxiosError) => {
+          const errorMessage =
+            error.response?.data || 'An internal error occurred.';
+          throw new InternalServerErrorException(errorMessage);
+        }),
+      );
+  }
 
   // async refreshTokens(userId: number, rt: string): Promise<any> {
   //   const authServiceUrl = this.configService.get<string>('AUTH_SERVICE_URL');
