@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { join } from 'path';
     UsersModule, 
     AuthModule,
     RestaurantModule,
+    NotificationModule,
   ],
   // controllers: [AppController],
   // providers: [AppService],
