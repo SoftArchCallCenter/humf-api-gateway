@@ -6,7 +6,6 @@ import {
   Post,
   Req,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import * as express from 'express';
 import { LoginUserDto } from 'src/auth/dto/login-user.dto';
 import { SignupUserDto } from 'src/auth/dto/signup-user.dto';
@@ -17,7 +16,6 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly configService: ConfigService,
   ) {}
 
   @Public()
