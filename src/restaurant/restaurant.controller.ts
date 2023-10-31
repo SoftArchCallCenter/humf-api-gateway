@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
-import { CreateRestaurantDto, FilterRestaurantDto } from '../../humf-proto/build/proto/restaurant';
+import { CreateRestaurantDto, FilterRestaurantDto } from '../../humf-proto/build/proto/restaurant'
 import { RestaurantUpdateField } from './entities/restaurant.entity';
 
 @Controller('restaurants')
