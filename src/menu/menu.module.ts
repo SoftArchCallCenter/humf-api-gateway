@@ -13,6 +13,7 @@ import { join } from 'path';
         name: 'MENU_PACKAGE',
         transport: Transport.GRPC,
         options: {
+          url: process.env.RESTAURANT_SERVICE_URL,
           package: [MENU_PACKAGE_NAME],
           protoPath: [join(__dirname, '../../proto/menu.proto')]
         }
