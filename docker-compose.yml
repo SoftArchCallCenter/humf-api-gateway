@@ -10,3 +10,9 @@ services:
       - ${API_GATEWAY_PORT}:${API_GATEWAY_PORT}
     volumes:
       - ./src:/app/src
+    networks:
+      - humf-service-network
+
+networks:
+  humf-service-network:
+    external: true

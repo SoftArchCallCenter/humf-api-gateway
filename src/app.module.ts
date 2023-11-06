@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { RestaurantModule } from './restaurant/restaurant.module';
+import { AtGuard } from './common/gaurds';
+import { APP_GUARD } from '@nestjs/core';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 import { NotificationModule } from './notification/notification.module';
 import { MenuModule } from './menu/menu.module';
 
@@ -19,7 +23,13 @@ import { MenuModule } from './menu/menu.module';
     NotificationModule,
     MenuModule
   ],
-  // controllers: [AppController],
-  // providers: [AppService],
+  controllers: [AppController],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AtGuard,
+    },
+  ],
 })
 export class AppModule {}
