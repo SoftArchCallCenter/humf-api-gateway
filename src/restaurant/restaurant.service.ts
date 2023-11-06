@@ -8,7 +8,8 @@ import {
   RestaurantList, 
   RestaurantServiceClient, 
   UpdateRestaurantDto, 
-  FilterRestaurantDto
+  FilterRestaurantDto,
+  UserIdDto
 } from '../../humf-proto/build/proto/restaurant';
 import { Observable } from 'rxjs';
 
@@ -29,6 +30,10 @@ export class RestaurantService implements OnModuleInit {
 
   findOne(restaurantId: RestaurantId): Observable<Restaurant>{
     return this.restaurantService.getRestaurant(restaurantId)
+  }
+
+  findOneByUserId(userId: UserIdDto): Observable<Restaurant>{
+    return this.restaurantService.getRestaurantByUserId(userId)
   }
 
   filter(filterRestaurantDto: FilterRestaurantDto){

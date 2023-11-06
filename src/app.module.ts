@@ -9,25 +9,19 @@ import { AtGuard } from './common/gaurds';
 import { APP_GUARD } from '@nestjs/core';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { NotificationModule } from './notification/notification.module';
+import { MenuModule } from './menu/menu.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    ClientsModule.register([
-      {
-        name: 'RESTAURANT_PACKAGE',
-        transport: Transport.GRPC,
-        options: {
-          package: 'restaurant',
-          protoPath: join(__dirname, "../humf-proto/proto/restaurant.proto"),
-        },
-      },
-    ]),
-    UsersModule,
+    UsersModule, 
     AuthModule,
     RestaurantModule,
+    NotificationModule,
+    MenuModule
   ],
   controllers: [AppController],
   providers: [
