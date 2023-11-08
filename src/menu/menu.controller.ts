@@ -3,7 +3,7 @@ import { MenuService } from './menu.service';
 import { CreateMenuDto } from 'humf-proto/build/proto/menu';
 import { MenuUpdateField } from './entities/menu.entity';
 
-@Controller('menu')
+@Controller('menus')
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
 
@@ -22,7 +22,7 @@ export class MenuController {
     return this.menuService.findOne({id : +id});
   }
 
-  @Get(':id')
+  @Get('/res/:id')
   findAllbyRestaurant(@Param('id') id: number){
     return this.menuService.findAllByRestaurant({id : +id})
   }
