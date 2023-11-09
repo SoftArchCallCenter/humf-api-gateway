@@ -7,6 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { NotificationModule } from './notification/notification.module';
 import { MenuModule } from './menu/menu.module';
+import { KitchenModule } from './kitchen/kitchen.module';
+import { QueueModule } from './queue/queue.module';
 
 @Module({
   imports: [
@@ -17,7 +19,9 @@ import { MenuModule } from './menu/menu.module';
     AuthModule,
     RestaurantModule,
     NotificationModule,
-    MenuModule
+    MenuModule,
+    KitchenModule,
+    QueueModule
   ],
   // controllers: [AppController],
   // providers: [AppService],
