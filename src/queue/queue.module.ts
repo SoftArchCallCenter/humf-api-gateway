@@ -12,7 +12,7 @@ import { join } from 'path';
         name: 'QUEUE_PACKAGE',
         transport: Transport.GRPC,
         options: {
-          url: process.env.KITCHEN_SERVICE_URL,
+          url: process.env.QUEUE_SERVICE_URL,
           package: [QUEUE_PACKAGE_NAME],
           protoPath: [join(__dirname, '../../proto/queue.proto')]
         }

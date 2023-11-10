@@ -32,7 +32,6 @@ export class MenuService implements OnModuleInit {
   }
 
   findAllByRestaurant(resId: RestaurantId): Observable<MenuList>{
-    console.log(resId)
     return this.menuService.getAllMenuByRestaurant(resId)
   }
 
