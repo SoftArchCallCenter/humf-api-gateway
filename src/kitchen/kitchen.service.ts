@@ -1,5 +1,5 @@
 import { Injectable, Inject, OnModuleInit } from '@nestjs/common';
-import { KitchenId, KitchenServiceClient } from 'humf-proto/build/proto/kitchen';
+import { KitchenId, KitchenServiceClient, UpdateTicketDto } from 'humf-proto/build/proto/kitchen';
 import { ClientGrpc } from '@nestjs/microservices';
 
 @Injectable()
@@ -15,5 +15,9 @@ export class KitchenService implements OnModuleInit {
 
     getTickets(kitchenId: KitchenId) {
         return this.kitchenService.getTickets(kitchenId)
+    }
+
+    updateTicket(updateTicketDto: UpdateTicketDto) {
+        return this.kitchenService.updateTicket(updateTicketDto)
     }
 }
