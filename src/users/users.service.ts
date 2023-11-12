@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { AxiosError } from 'axios';
+import * as express from 'express';
 import { Observable, catchError, firstValueFrom, map } from 'rxjs';
 
 @Injectable()
@@ -28,11 +29,17 @@ export class UsersService {
       );
   }
 
-  async findAll() {
+  async findAll(request: express.Request): Promise<any>  {
     const userServiceUrl = this.configService.get<string>('USER_SERVICE_URL');
     const findAllUserUrl = `${userServiceUrl}/users`;
+    const jwtToken = request.headers.authorization;
+    const headers = {
+      Authorization: jwtToken,
+    };
+    console.log(headers)
+
     return this.httpService
-      .get(findAllUserUrl)
+      .get(findAllUserUrl, {headers})
       .pipe(map((resp) => resp.data))
       .pipe(
         catchError((error: AxiosError) => {
@@ -43,11 +50,16 @@ export class UsersService {
       );
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, request: express.Request): Promise<any> {
     const userServiceUrl = this.configService.get<string>('USER_SERVICE_URL');
     const findOneUserUrl = `${userServiceUrl}/users/${id}`;
+    const jwtToken = request.headers.authorization;
+    const headers = {
+      Authorization: jwtToken,
+    };
+    console.log(headers)
     return this.httpService
-      .get(findOneUserUrl)
+      .get(findOneUserUrl, {headers})
       .pipe(map((resp) => resp.data))
       .pipe(
         catchError((error: AxiosError) => {
