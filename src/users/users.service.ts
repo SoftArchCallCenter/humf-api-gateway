@@ -57,7 +57,6 @@ export class UsersService {
     const headers = {
       Authorization: jwtToken,
     };
-    console.log(headers)
     return this.httpService
       .get(findOneUserUrl, {headers})
       .pipe(map((resp) => resp.data))
@@ -70,11 +69,15 @@ export class UsersService {
       );
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: number, updateUserDto: UpdateUserDto, request: express.Request): Promise<any> {
     const userServiceUrl = this.configService.get<string>('USER_SERVICE_URL');
     const updateUserUrl = `${userServiceUrl}/users/${id}`;
+    const jwtToken = request.headers.authorization;
+    const headers = {
+      Authorization: jwtToken,
+    };
     return this.httpService
-      .patch(updateUserUrl, updateUserDto)
+      .patch(updateUserUrl, updateUserDto, {headers})
       .pipe(map((resp) => resp.data))
       .pipe(
         catchError((error: AxiosError) => {
@@ -85,14 +88,18 @@ export class UsersService {
       );
   }
 
-  async remove(id: number) {
+  async remove(id: number, request: express.Request): Promise<any> {
     const userServiceUrl = this.configService.get<string>('USER_SERVICE_URL');
     const removeUserUrl = `${userServiceUrl}/users/${id}`;
-    const response = await firstValueFrom(
-      this.httpService.delete(removeUserUrl)
-    );
+    // const response = await firstValueFrom(
+    //   this.httpService.delete(removeUserUrl)
+    // );
+    const jwtToken = request.headers.authorization;
+    const headers = {
+      Authorization: jwtToken,
+    };
     return this.httpService
-      .delete(removeUserUrl)
+      .delete(removeUserUrl, {headers})
       .pipe(map((resp) => resp.data))
       .pipe(
         catchError((error: AxiosError) => {
