@@ -22,7 +22,7 @@ export class MenuController {
     return this.menuService.findOne({id : +id});
   }
 
-  @Get(':id')
+  @Get('/res/:id')
   findAllbyRestaurant(@Param('id') id: number){
     return this.menuService.findAllByRestaurant({id : +id})
   }

@@ -11,6 +11,8 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 import { NotificationModule } from './notification/notification.module';
 import { MenuModule } from './menu/menu.module';
+import { KitchenModule } from './kitchen/kitchen.module';
+import { QueueModule } from './queue/queue.module';
 
 @Module({
   imports: [
@@ -21,7 +23,9 @@ import { MenuModule } from './menu/menu.module';
     AuthModule,
     RestaurantModule,
     NotificationModule,
-    MenuModule
+    MenuModule,
+    KitchenModule,
+    QueueModule
   ],
   controllers: [AppController],
   providers: [
