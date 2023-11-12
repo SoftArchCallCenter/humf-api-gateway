@@ -1,6 +1,4 @@
 import { Injectable, Inject, OnModuleInit } from '@nestjs/common';
-import { CreateQueueDto } from './dto/create-queue.dto';
-import { UpdateQueueDto } from './dto/update-queue.dto';
 import { AcceptOrderDto, Order, QueueServiceClient } from 'humf-proto/build/proto/queue';
 import { ClientGrpc } from '@nestjs/microservices';
 import { RestaurantId } from 'humf-proto/build/proto/menu';
