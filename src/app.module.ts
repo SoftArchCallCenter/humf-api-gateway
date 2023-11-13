@@ -13,6 +13,7 @@ import { NotificationModule } from './notification/notification.module';
 import { MenuModule } from './menu/menu.module';
 import { KitchenModule } from './kitchen/kitchen.module';
 import { QueueModule } from './queue/queue.module';
+import { ImageModule } from './image/image.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { QueueModule } from './queue/queue.module';
     NotificationModule,
     MenuModule,
     KitchenModule,
-    QueueModule
+    QueueModule,
+    ImageModule
   ],
   controllers: [AppController],
   providers: [
