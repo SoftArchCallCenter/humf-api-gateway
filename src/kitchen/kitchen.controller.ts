@@ -11,8 +11,23 @@ export class KitchenController {
     return this.kitchenService.getTickets({id : +id});
   }
 
+  @Get('/user/:id')
+  getTicketsByUserId(@Param('id') id: number){
+    return this.kitchenService.getTicketsByUserId({id : +id})
+  }
+
   @Patch(":id")
   updateTicket(@Param('id') id: number, @Body() updateTicketDto: UpdateTicketDto){
     return this.kitchenService.updateTicket({id : +id, status: updateTicketDto.status});
+  }
+
+  @Post(":id")
+  completeTicket(@Param('id') id: number){
+    return this.kitchenService.completeTicket({id : +id});
+  }
+
+  @Get('/ticket')
+  getAllKitchenTotalTickets(){
+    return this.kitchenService.getAllKitchenTotalTickets()
   }
 }
