@@ -29,7 +29,7 @@ export class KitchenService implements OnModuleInit {
         return this.kitchenService.completeTicket(ticketId)
     }
 
-    getAllKitchenTotalTickets(){
+    async getAllKitchenTotalTickets(){
         return this.kitchenService.getAllKitchenTotalTickets({})
     }
 
