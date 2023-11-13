@@ -6,6 +6,12 @@ import { UpdateTicketDto } from './dto/update-ticket.dto';
 export class KitchenController {
   constructor(private readonly kitchenService: KitchenService) {}
 
+  @Get('/ticket')
+  getAllKitchenTotalTickets(){
+    console.log("Is this work")
+    return this.kitchenService.getAllKitchenTotalTickets()
+  }
+
   @Get(':id')
   getTickets(@Param('id') id: number){
     return this.kitchenService.getTickets({id : +id});
@@ -26,8 +32,4 @@ export class KitchenController {
     return this.kitchenService.completeTicket({id : +id});
   }
 
-  @Get('/ticket')
-  getAllKitchenTotalTickets(){
-    return this.kitchenService.getAllKitchenTotalTickets()
-  }
 }

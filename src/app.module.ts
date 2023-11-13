@@ -14,6 +14,7 @@ import { MenuModule } from './menu/menu.module';
 import { KitchenModule } from './kitchen/kitchen.module';
 import { QueueModule } from './queue/queue.module';
 import { OrderModule } from './order/order.module';
+import { ImageModule } from './image/image.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { OrderModule } from './order/order.module';
     KitchenModule,
     QueueModule,
     OrderModule
+    ImageModule
   ],
   controllers: [AppController],
   providers: [
