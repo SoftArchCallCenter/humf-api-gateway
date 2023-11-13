@@ -3,7 +3,7 @@ import { RestaurantService } from './restaurant.service';
 import { CreateRestaurantDto, FilterRestaurantDto } from '../../humf-proto/build/proto/restaurant'
 import { RestaurantUpdateField } from './entities/restaurant.entity';
 
-@Controller('restaurants')
+@Controller('restaurant')
 export class RestaurantController {
   constructor(private readonly restaurantService: RestaurantService) {}
 
