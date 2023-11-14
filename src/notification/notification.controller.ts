@@ -18,8 +18,9 @@ export class NotificationController {
     return this.notificationService.getStatus(order_id);
   }
 
-  @Get('user')
+  @Post('/user')
   getNotiByUser(@Body() getNotiByUserDto: GetByUserNotificationDto) {
+    // console.log({getNotiByUserDto})
     return this.notificationService.getNotiByUser(getNotiByUserDto);
   }
 
