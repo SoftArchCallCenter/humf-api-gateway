@@ -28,7 +28,7 @@ import { ImageModule } from './image/image.module';
     MenuModule,
     KitchenModule,
     QueueModule,
-    OrderModule
+    OrderModule,
     ImageModule
   ],
   controllers: [AppController],
