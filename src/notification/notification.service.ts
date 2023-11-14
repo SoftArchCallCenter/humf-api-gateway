@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { map , lastValueFrom } from 'rxjs';
 import { HttpService } from '@nestjs/axios';
+import { GetByUserNotificationDto } from './dto/get-by-user-notification.dto';
 
 @Injectable()
 export class NotificationService {
@@ -30,6 +31,17 @@ export class NotificationService {
       order_id: order_id,
       status: status
     }
+  }
+
+  async getNotiByUser(getNotiByUserDto: GetByUserNotificationDto) {
+    const notifications = await lastValueFrom(
+      this.httpService.post(`http://localhost:6000/user`,getNotiByUserDto).pipe(
+        map(res => res.data)
+      )
+    );
+    return {
+      notification: notifications
+    };
   }
 
 
